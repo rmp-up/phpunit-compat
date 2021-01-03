@@ -1,0 +1,17 @@
+{
+  "name": "rmp-up/phpunit-compat",
+  "description": "Offering a TestCase class compatible with multiple major PHPUnit-Versions",
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": {
+      "RmpUp\\PHPUnitCompat\\": "lib/"
+    }
+  },
+  "autoload-dev": {
+    "RmpUp\\PHPUnitCompat\\Test": "opt/doc"
+  },
+  "require": {
+    "composer/package-versions-deprecated": "~1",
+    "phpunit/phpunit": "~8"
+  }
+}
