@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * TestCase.php
+ * ExpectExceptionMessageRegExp.php
  *
  * LICENSE: This source file is created by the company around M. Pretzlaw
  * located in Germany also known as rmp-up. All its contents are proprietary
@@ -20,18 +20,21 @@
 
 declare(strict_types=1);
 
-namespace RmpUp\PHPUnitCompat\Compat\v9;
+namespace TestCase;
+
+use RmpUp\PHPUnitCompat\TestCase;
+use RuntimeException;
 
 /**
- * TestCase
+ * ExpectExceptionMessageRegExp
  */
-class TestCase extends \RmpUp\PHPUnitCompat\Compat\v8\TestCase
+class ExpectExceptionMessageRegExpTest extends TestCase
 {
-	/**
-	 * @deprecated Use expectExceptionMessageMatches() instead
-	 */
-	public function expectExceptionMessageRegExp(string $regularExpression): void
+	public function testMethodAccessible()
 	{
-		$this->expectExceptionMessageMatches($regularExpression);
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessageRegExp('/This is a test/');
+
+		throw new RuntimeException('This is a test');
 	}
 }
