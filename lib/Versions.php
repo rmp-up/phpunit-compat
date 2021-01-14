@@ -29,8 +29,24 @@ namespace RmpUp\PHPUnitCompat;
  */
 class Versions
 {
-    public static function getMajorVersion(string $packageName)
+    public static function getPhpUnitVersion(): int
     {
-        return (int) strtok(\PackageVersions\Versions::getVersion($packageName), '.');
+        if (class_exists(\PHPUnit\Framework\BaseTestListener::class)) {
+        	return 6;
+		}
+
+        if (class_exists(\PHPUnit\Util\TestDox\TestResult::class)) {
+        	return 7;
+		}
+
+        if (class_exists(\PHPUnit\Util\Configuration::class)) {
+        	return 8;
+		}
+
+        if (class_exists(\PHPUnit\Util\Blacklist::class)) {
+        	return 9;
+		}
+
+        return 0;
     }
 }

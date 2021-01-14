@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * TestCase.php
+ * VersionsTest.php
  *
  * LICENSE: This source file is created by the company around M. Pretzlaw
  * located in Germany also known as rmp-up. All its contents are proprietary
@@ -20,20 +20,26 @@
 
 declare(strict_types=1);
 
-namespace RmpUp\PHPUnitCompat\Compat\v9;
+namespace RmpUp\PHPUnitCompat\Test;
 
-use RmpUp\PHPUnitCompat\Compat\v8\Assert\ArraySubset;
+use RmpUp\PHPUnitCompat\TestCase;
 
 /**
- * TestCase
+ * VersionsTest
+ *
+ * @copyright 2021 Pretzlaw (https://rmp-up.de)
  */
-class TestCase extends \RmpUp\PHPUnitCompat\Compat\v8\TestCase
+class VersionsTest extends TestCase
 {
-	/**
-	 * @deprecated Use expectExceptionMessageMatches() instead
-	 */
-	public function expectExceptionMessageRegExp(string $regularExpression): void
+	private $currentPhpUnitVersion;
+
+	protected function compatSetUp()
 	{
-		$this->expectExceptionMessageMatches($regularExpression);
+		$this->currentPhpUnitVersion = (int) strtok(\PackageVersions\Versions::getVersion('phpunit/phpunit'), '.');
+	}
+
+	public function testCanDetermineVersions()
+	{
+		static::assertEquals($this->currentPhpUnitVersion, \RmpUp\PHPUnitCompat\Versions::getPhpUnitVersion());
 	}
 }

@@ -33,11 +33,19 @@ class TestCase extends \PHPUnit\Framework\TestCase
 {
     use TestCaseTrait;
 
+	/**
+	 * Replacing 
+	 *
+	 * @deprecated Please use ::compatSetUp() instead
+	 */
     protected function setUp()
     {
         $this->compatSetUp();
     }
 
+	/**
+	 * @deprecated Please use ::
+	 */
     public static function setUpBeforeClass()
     {
         static::compatSetUpBeforeClass();

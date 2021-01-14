@@ -22,7 +22,9 @@ declare(strict_types=1);
 
 namespace RmpUp\PHPUnitCompat\Compat\v8;
 
+use PHPUnit\Util\InvalidArgumentHelper;
 use RmpUp\PHPUnitCompat\Compat\TestCaseTrait;
+use RmpUp\PHPUnitCompat\Compat\v8\Assert\ArraySubset;
 
 /**
  * TestCase
@@ -32,6 +34,8 @@ use RmpUp\PHPUnitCompat\Compat\TestCaseTrait;
 class TestCase extends \PHPUnit\Framework\TestCase
 {
     use TestCaseTrait;
+
+    use ArraySubset;
 
     protected function setUp(): void
     {

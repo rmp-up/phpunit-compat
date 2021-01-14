@@ -28,7 +28,7 @@ use RmpUp\PHPUnitCompat\Compat\v7\TestCase as TestCaseV7;
 use RmpUp\PHPUnitCompat\Compat\v8\TestCase as TestCaseV8;
 use RmpUp\PHPUnitCompat\Compat\v9\TestCase as TestCaseV9;
 
-switch (Versions::getMajorVersion('phpunit/phpunit')) {
+switch (Versions::getPhpUnitVersion()) {
     case 6:
         class_alias(TestCaseV6::class, TestCase::class);
         break;
