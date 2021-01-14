@@ -24,6 +24,7 @@ namespace RmpUp\PHPUnitCompat\Compat\v8;
 
 use PHPUnit\Util\InvalidArgumentHelper;
 use RmpUp\PHPUnitCompat\Compat\TestCaseTrait;
+use RmpUp\PHPUnitCompat\Compat\v7\Assert\MatchesRegularExpression;
 use RmpUp\PHPUnitCompat\Compat\v8\Assert\ArraySubset;
 
 /**
@@ -33,23 +34,47 @@ class TestCase extends \PHPUnit\Framework\TestCase
 {
     use TestCaseTrait;
 
+	/**
+	 * Backward-compatibility
+	 *
+	 * Note: This may become heavily opinionated some day
+	 * and very old methods may be dropped.
+	 * Fingers crossed that we can keep BC up for all of them.
+	 */
     use ArraySubset;
 
+	/**
+	 * Forward-compatibility
+	 */
+    use MatchesRegularExpression;
+
+	/**
+	 * @deprecated Please use ::compatSetUp() instead
+	 */
     protected function setUp(): void
     {
         $this->compatSetUp();
     }
 
+	/**
+	 * @deprecated Please use ::compatSetUpBeforeClass() instead.
+	 */
     public static function setUpBeforeClass(): void
     {
         static::compatSetUpBeforeClass();
     }
 
+	/**
+	 * @deprecated Please use ::compatTearDown() instead.
+	 */
     protected function tearDown(): void
     {
         $this->compatTearDown();
     }
 
+	/**
+	 * @deprecated Please use compatTearDownAfterClass() instead.
+	 */
     public static function tearDownAfterClass(): void
     {
         static::compatTearDownAfterClass();

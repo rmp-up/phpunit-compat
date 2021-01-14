@@ -29,24 +29,34 @@ namespace RmpUp\PHPUnitCompat;
  */
 class Versions
 {
+	private static $version;
+
+	/**
+	 * List of classes last seen in the mapped PHPUnit version
+	 *
+	 * Those classes are all deprecated.
+	 * Their last occurrence tells us something about the PHPUnit version.
+	 *
+	 * @var int[]
+	 */
+	private static $classToVersion = [
+		\PHPUnit\Framework\BaseTestListener::class => 6,
+		\PHPUnit\Util\TestDox\TestResult::class => 7,
+		\PHPUnit\Util\Configuration::class => 8,
+		\PHPUnit\Util\Blacklist::class => 9
+	];
+
     public static function getPhpUnitVersion(): int
     {
-        if (class_exists(\PHPUnit\Framework\BaseTestListener::class)) {
-        	return 6;
+    	if (null === self::$version) {
+			foreach (self::$classToVersion as $className => $phpUnitVersion) {
+				if (class_exists($className)) {
+					self::$version = $phpUnitVersion;
+					break;
+				}
+			}
 		}
 
-        if (class_exists(\PHPUnit\Util\TestDox\TestResult::class)) {
-        	return 7;
-		}
-
-        if (class_exists(\PHPUnit\Util\Configuration::class)) {
-        	return 8;
-		}
-
-        if (class_exists(\PHPUnit\Util\Blacklist::class)) {
-        	return 9;
-		}
-
-        return 0;
+    	return self::$version;
     }
 }

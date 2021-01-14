@@ -22,11 +22,53 @@ declare(strict_types=1);
 
 namespace RmpUp\PHPUnitCompat\Compat\v6;
 
+use RmpUp\PHPUnitCompat\Compat\TestCaseTrait;
+
 /**
  * TestCase
  *
  * @copyright 2021 Pretzlaw (https://rmp-up.de)
  */
-class TestCase extends \RmpUp\PHPUnitCompat\Compat\v7\TestCase
+class TestCase extends \PHPUnit\Framework\TestCase
 {
+	use TestCaseTrait;
+
+	/**
+	 * Forward-compatibility
+	 */
+	use Assert\MatchesRegularExpression;
+
+	/**
+	 * Replacing
+	 *
+	 * @deprecated Please use ::compatSetUp() instead
+	 */
+	protected function setUp()
+	{
+		$this->compatSetUp();
+	}
+
+	/**
+	 * @deprecated Please use ::compatSetUpBeforeClass()
+	 */
+	public static function setUpBeforeClass()
+	{
+		static::compatSetUpBeforeClass();
+	}
+
+	/**
+	 * @deprecated Please use ::compatTearDown()
+	 */
+	protected function tearDown()
+	{
+		$this->compatTearDown();
+	}
+
+	/**
+	 * @deprecated Please use ::compatTearDownAfterClass()
+	 */
+	public static function tearDownAfterClass()
+	{
+		static::compatTearDownAfterClass();
+	}
 }
