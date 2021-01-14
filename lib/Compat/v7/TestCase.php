@@ -34,8 +34,11 @@ class TestCase extends \PHPUnit\Framework\TestCase
     use TestCaseTrait;
 
 	/**
-	 * Replacing 
-	 *
+	 * Forward-compatibility
+	 */
+    use Assert\MatchesRegularExpression;
+
+	/**
 	 * @deprecated Please use ::compatSetUp() instead
 	 */
     protected function setUp()
@@ -44,18 +47,24 @@ class TestCase extends \PHPUnit\Framework\TestCase
     }
 
 	/**
-	 * @deprecated Please use ::
+	 * @deprecated Please use ::compatSetUpBeforeClass()
 	 */
     public static function setUpBeforeClass()
     {
         static::compatSetUpBeforeClass();
     }
 
+	/**
+	 * @deprecated Please use ::compatTearDown()
+	 */
     protected function tearDown()
     {
         $this->compatTearDown();
     }
 
+	/**
+	 * @deprecated Please use ::compatTearDownAfterClass()
+	 */
     public static function tearDownAfterClass()
     {
         static::compatTearDownAfterClass();
