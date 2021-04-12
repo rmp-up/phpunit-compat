@@ -35,7 +35,10 @@ class ArraySubset extends Constraint
 
     public function __construct(iterable $subset, bool $strict = false)
     {
-        parent::__construct();
+    	if (in_array('__construct', get_class_methods(Constraint::class))) {
+    		// Seen in 8.4.* but vanished in 8.5.0
+        	parent::__construct();
+		}
 
         $this->strict = $strict;
         $this->subset = $subset;
@@ -96,6 +99,12 @@ class ArraySubset extends Constraint
      */
     public function toString(): string
     {
+    	if (method_exists($this, 'exporter')) {
+    		// For PHPUnit 8.5.*
+    		return 'has the subset ' . $this->exporter()->export($this->subset);
+		}
+
+    	// For PHPUnit 8.4.*
         return 'has the subset ' . $this->exporter->export($this->subset);
     }
 

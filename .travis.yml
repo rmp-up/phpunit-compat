@@ -4,6 +4,7 @@ php:
   # see http://php.net/supported-versions.php
   - '7.3' # Until 6 Dec 2021
   - '7.4' # Until 28 Nov 2022
+  - '8.0' # Until 26 Nov 2023
 
 env:
   global:
@@ -11,9 +12,7 @@ env:
     - XDEBUG_MODE=coverage
   matrix:
     # see https://phpunit.de/supported-versions.html
-    - PHPUNIT_VERSION=8.0.*
     - PHPUNIT_VERSION=8.5.*
-    - PHPUNIT_VERSION=9.2.*
     - PHPUNIT_VERSION=9.5.*
 
 matrix:
@@ -27,6 +26,14 @@ matrix:
       env: PHPUNIT_VERSION=7.5.*
     - php: '7.2'
       env: PHPUNIT_VERSION=8.5.*
+    - php: '7.3'
+      env: PHPUNIT_VERSION=8.0.*
+    - php: '7.4'
+      env: PHPUNIT_VERSION=8.5.*
+    - php: '8.0'
+      env: PHPUNIT_VERSION=8.5.*
+    - php: '8.0'
+      env: PHPUNIT_VERSION=8.4.*
 
     # We add some tests here for that we want to achieve or keep compatibility.
     # Some are made due to unstable SemVer of testing packages (guess which).
