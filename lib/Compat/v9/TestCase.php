@@ -22,13 +22,39 @@ declare(strict_types=1);
 
 namespace RmpUp\PHPUnitCompat\Compat\v9;
 
-use RmpUp\PHPUnitCompat\Compat\v8\Assert\ArraySubset;
+use PHPUnit\Util\InvalidArgumentHelper;
+use RmpUp\PHPUnitCompat\Compat\TestCaseTrait;
+use RmpUp\PHPUnitCompat\Compat\v9\Assert\ArraySubset;
 
 /**
  * TestCase
  */
-class TestCase extends \RmpUp\PHPUnitCompat\Compat\v8\TestCase
+class TestCase extends \PHPUnit\Framework\TestCase
 {
+	use TestCaseTrait;
+
+	use ArraySubset;
+
+	protected function setUp(): void
+	{
+		$this->compatSetUp();
+	}
+
+	public static function setUpBeforeClass(): void
+	{
+		static::compatSetUpBeforeClass();
+	}
+
+	protected function tearDown(): void
+	{
+		$this->compatTearDown();
+	}
+
+	public static function tearDownAfterClass(): void
+	{
+		static::compatTearDownAfterClass();
+	}
+
 	/**
 	 * @deprecated Use expectExceptionMessageMatches() instead
 	 */

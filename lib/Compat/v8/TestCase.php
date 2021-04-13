@@ -28,8 +28,6 @@ use RmpUp\PHPUnitCompat\Compat\v8\Assert\ArraySubset;
 
 /**
  * TestCase
- *
- * @copyright 2021 Pretzlaw (https://rmp-up.de)
  */
 class TestCase extends \PHPUnit\Framework\TestCase
 {

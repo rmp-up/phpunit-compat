@@ -51,10 +51,21 @@ test: &test
       --log-junit phpunit-report.xml
   parallel:
     matrix:
-      - PHP_VERSION: "7.3" # Until 6 Dec 2021
-        PHPUNIT_VERSION: "6.0.0"
+      - PHP_VERSION: "8.0" # Until 6 Dec 2021
+        PHPUNIT_VERSION: "9.5.*"
       - PHP_VERSION: "7.4" # Until 28 Nov 2022
-        PHPUNIT_VERSION: "6.0.0"
+        PHPUNIT_VERSION: "9.2.*"
+      - PHP_VERSION: "7.3" # Until 28 Nov 2022
+        PHPUNIT_VERSION: "9.0.0"
+
+      - PHP_VERSION: "8.0"
+        PHPUNIT_VERSION: "8.5.*"
+      - PHP_VERSION: "7.4"
+        PHPUNIT_VERSION: "8.3.*"
+      - PHP_VERSION: "7.3"
+        PHPUNIT_VERSION: "8.1.*"
+      - PHP_VERSION: "7.2"
+        PHPUNIT_VERSION: "8.0.0"
 
 #
 # Compatibility
@@ -65,16 +76,19 @@ test: &test
   needs: [test]
 
 deprecated:
-  <<: *compat
+  <<: *test
   parallel:
     matrix:
-      # Deprecated PHP versions but we try keeping it up
+      # Deprecated PHP and PHPUnit versions but we try keeping it up
       - PHP_VERSION: "7.0"
-        PHPUNIT_VERSION: "6.0.0"
-      - PHP_VERSION: "7.1"
-        PHPUNIT_VERSION: "6.0.0"
+        PHPUNIT_VERSION: "6.5.*"
       - PHP_VERSION: "7.2"
         PHPUNIT_VERSION: "6.0.0"
+
+      - PHP_VERSION: "7.1"
+        PHPUNIT_VERSION: "7.5.*"
+      - PHP_VERSION: "7.3"
+        PHPUNIT_VERSION: "7.0.0"
 
 upcoming:
   <<: *compat
